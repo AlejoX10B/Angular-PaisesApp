@@ -1,0 +1,4 @@
+<form (ngSubmit)="search()">
+    <input class="form-control" type="text" name="query-term" [placeholder]="placeholder" (input)="keyPressed()"
+        [(ngModel)]="queryTerm">
+</form>
