@@ -6,25 +6,39 @@ import { CountryService } from '../../services/country.service';
 @Component({
   selector: 'app-by-country',
   templateUrl: './by-country.component.html',
-  styles: [
-  ]
+  styles: [`li {cursor: pointer;}`]
 })
 export class ByCountryComponent {
 
   queryTerm: string = '';
   existsError: boolean = false;
-  countries: Country[] = []
+  showSuggestions: boolean = false;
+
+  countries: Country[] = [];
+  suggestions: Country[] = [];
 
   constructor(private countryService: CountryService) { }
 
   suggest(queryTerm: string): void {
     this.existsError = false;
+    this.showSuggestions = true;
 
+    this.queryTerm = queryTerm;
+
+    this.countryService.searchByCountry(queryTerm)
+      .subscribe({
+        next: (resp) => {
+          this.suggestions = resp.splice(0,5);
+        },
+        error: (err) => {
+          this.suggestions = [];
+        }
+      });
   }
 
   search(queryTerm: string): void {
     this.existsError = false;
-    this.queryTerm = queryTerm;
+    this.showSuggestions = false;
 
     this.countryService.searchByCountry(this.queryTerm)
       .subscribe({

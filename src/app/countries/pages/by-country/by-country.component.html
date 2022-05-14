@@ -1,14 +1,26 @@
-<h2>Por País</h2>
-<hr>
+<div class="animate__animated animate__fadeIn animate__faster">
+  <h2>Por País</h2>
+  <hr>
 
-<div class="row">
-    <div class="col">
-        <app-country-input placeholder="Buscar por país..." (onDebounce)="suggest($event)" (onEnter)="search($event)">
-        </app-country-input>
-    </div>
+  <div class="row">
+      <div class="col">
+          <app-country-input placeholder="Buscar por país..." (onDebounce)="suggest($event)" (onEnter)="search($event)">
+          </app-country-input>
+      </div>
+  </div>
+  <ul *ngIf="showSuggestions" class="list-group user-select-none">
+    <li *ngFor="let country of suggestions" class="list-group-item list-group-item-action"
+        [routerLink]="['/country', country.cca2]">
+      <span class="nav-link fst-italic p-0">{{country.name.common}}</span>
+    </li>
+    <li class="list-group-item list-group-item-action"
+        (click)="search(queryTerm)">
+      <span class="nav-link ps-0">Buscar "{{queryTerm}}"</span>
+    </li>
+  </ul>
+
+  <hr>
 </div>
-
-<hr>
 
 <div *ngIf="existsError" class="alert alert-danger">
     ⚠️ No se encontró nada con el término: {{ queryTerm }}

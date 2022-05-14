@@ -1,1 +1,56 @@
-<p>see-country works!</p>
+
+<div *ngIf="!country" class="alert alert-info">
+  Espere por favor...
+</div>
+
+<div *ngIf="country" class="row">
+  <div class="col-12">
+    <h1>País: <small>{{ country.name.common }}</small></h1>
+  </div>
+
+  <div class="row">
+    <div class="col-4">
+      <h3>Bandera</h3>
+      <img class="img-thumbnail" [src]="country.flags.png" alt="">
+    </div>
+    <div class="col">
+      <h3>Información</h3>
+      <ul class="list-group">
+        <li class="list-group-item">
+          <strong>Población:</strong> {{ country.population | number }}
+        </li>
+        <li class="list-group-item">
+          <strong>Código numérico:</strong> {{ country.ccn3 }}
+        </li>
+        <li class="list-group-item">
+          <strong>Código alpha:</strong> {{ country.cca3 }}
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Traducciones</h3>
+  <div class="row">
+    <div class="col">
+      <span class="badge bg-primary me-2">
+        {{ country.translations['jpn'].common }}
+      </span>
+      <span class="badge bg-primary me-2">
+        {{ country.translations['kor'].common }}
+      </span>
+      <span class="badge bg-primary me-2">
+        {{ country.translations['zho'].common }}
+      </span>
+      <span class="badge bg-primary me-2">
+        {{ country.translations['fra'].common }}
+      </span>
+      <span class="badge bg-primary me-2">
+        {{ country.translations['deu'].common }}
+      </span>
+    </div>
+  </div>
+
+  <pre class="mt-5">
+    {{ country | json }}
+  </pre>
+</div>

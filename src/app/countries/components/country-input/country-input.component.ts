@@ -4,8 +4,7 @@ import { debounceTime, Subject } from 'rxjs';
 @Component({
   selector: 'app-country-input',
   templateUrl: './country-input.component.html',
-  styles: [
-  ]
+  styles: []
 })
 export class CountryInputComponent implements OnInit {
 
